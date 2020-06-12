@@ -54,6 +54,11 @@ Route::get('/home', 'HomeController@index')->name('home.index');
 
 Route::get('/owner', 'OwnerController@index')->name('owners.index');
 Route::get('/owner/create', 'OwnerController@create');
+Route::get('/owner/{owner_id}/edit', 'OwnerController@edit')->name('bob');
+Route::post('/owner', 'OwnerController@store');
+Route::post('/owner/{owner_id}', 'OwnerController@update');
+
+
 
 Route::get('/pet', 'PetController@index')->name('pets.index');
 Route::get('/pet/create', 'PetController@create');

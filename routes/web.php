@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Pets;
+use App\Owners;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,34 @@ Route::get('/', function () {
 });
 
 
+Route::get('/api', function () {
+    $json = file_get_contents(storage_path('data/clients.json'));
+	$objs = json_decode($json,true);
+    
+
+    foreach ($objs as $item) {
+        $owner = new Owners;
+        $owner->first_name = $item['first_name'];
+        $owner->surname = $item['surname'];
+        $owner->save();
+
+        foreach ($item['pets'] as $attribute) {
+            $pet = new Pets;
+            $pet->name = $attribute['name'];
+            $pet->breed = $attribute['breed'];
+            $pet->weight = $attribute['weight'];
+            $pet->age = $attribute['age'];
+            $pet->image = $attribute['photo'];
+            $pet->owner_id = $owner->id;
+            $pet->save();
+        }
+    }
+
+
+    // return gettype($objs[0]);
+    var_dump($objs);
+
+});
 Route::get('/home', 'HomeController@index')->name('home.index');
 
 Route::get('/owner', 'OwnerController@index')->name('owners.index');

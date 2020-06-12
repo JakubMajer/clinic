@@ -15,11 +15,11 @@ class CreatePetsTable extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('breed');
-            $table->integer('weight');
-            $table->integer('age');
-            $table->text('image');
+            $table->text('name')->nullable();
+            $table->text('breed')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('age')->nullable();
+            $table->text('image')->nullable();
             $table->integer('owner_id');
             $table->timestamps();
         });

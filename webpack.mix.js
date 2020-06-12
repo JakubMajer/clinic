@@ -22,8 +22,8 @@ if (!mix.inProduction()) {
     .sourceMaps()
 }
  
-mix.react('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+mix.sass('resources/sass/app.scss', 'public/css')
+    .react('resources/js/app.js', 'public/js')
  
     .browserSync({
         host: 'localhost',

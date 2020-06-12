@@ -10,33 +10,54 @@ class OwnerController extends Controller
 {
     public function index()
     {
-        return view('owners.index');
+        return view('owner.index');
     }
     public function show($owner_id){
 
-        $owner = Owner::findOrFail($owner_id);
+        $owner = Owners::findOrFail($owner_id);
 
-        $books = Book::where('publisher_id', $publisher_id)->get();
+        $owner = Owners::where('owner_id', $owner_id)->get();
 
-        return view('publishers.show', compact('publisher', 'books'));
+        return view('owner.show', compact('owner'));
     }
 
     public function create()
     {
-        return view('owners.create');
+        return view('owner.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        # code...
+        $owner = new Owners;
+        $owner->first_name = $request->input('first_name');
+        $owner->surname = $request->input('surname');
+
+
+        $owner->save();
+
+        return redirect('/owner/' . $owner->id);
     }
 
-    public function edit()
+    public function edit($owner_id)
     {
-        # code...
+        $owner = Owners::findOrFail($owner_id);
+
+        return view('owner.edit', compact('owner'));
     }
-    public function update()
+
+    public function update($owner_id, Request $request)
     {
-        # code...
+        $owner = Owners::findOrFail($owner_id);
+
+        $owner->first_name = $request->input('first_name');
+        $owner->surname = $request->input('surname');
+
+
+        $owner->save();
+
+
+        return redirect(route('bob', [
+            $owner->id
+        ]));
     }
 }

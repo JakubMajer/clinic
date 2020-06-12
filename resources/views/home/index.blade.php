@@ -1,5 +1,5 @@
 @extends('layouts.layout', [
-    'title'=>"St. Hector\'s veterinary clinic"
+    'title'=>"St. Hector's veterinary clinic"
 ])
 
 @section('content')

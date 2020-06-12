@@ -20,7 +20,7 @@ class PetController extends Controller
 
     public function create()
     {
-        return view('pet.create');
+        return view('pets.create');
     }
 
     public function store()

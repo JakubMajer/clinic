@@ -1,4 +1,4 @@
-<h1>Create</h1>
+<h1>Create new Dog</h1>
 
 <form method="POST" action="/pet">
 
@@ -28,7 +28,7 @@
     </div>
 
     <div>
-        <label for="">age</label>
+        <label for="">Age</label>
         <input type="text" name="age">
 
     </div>

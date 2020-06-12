@@ -1,3 +1,8 @@
+@extends('layouts/layout', [
+    'title' => 'Create Pet'
+])
+@section('content')
+
 <h1>Create new Dog</h1>
 
 <form method="POST" action="/pet">
@@ -32,8 +37,14 @@
         <input type="text" name="age">
 
     </div>
+    <div>
+        <label for="">Owner ID</label>
+        <input type="text" name="owner_id">
+
+    </div>
 
     <button type="submit">Save new dog!</button>
 
 
 </form>
+@endsection

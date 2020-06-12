@@ -48,13 +48,27 @@ Route::get('/api', function () {
     var_dump($objs);
 
 });
+
+
 Route::get('/home', 'HomeController@index')->name('home.index');
 
 Route::get('/owner', 'OwnerController@index')->name('owners.index');
 Route::get('/owner/create', 'OwnerController@create');
+Route::get('/owner/{owner_id}/edit', 'OwnerController@edit')->name('bob');
+Route::post('/owner', 'OwnerController@store');
+Route::post('/owner/{owner_id}', 'OwnerController@update');
+
+
 
 Route::get('/pet', 'PetController@index')->name('pets.index');
 Route::get('/pet/create', 'PetController@create');
+
+Route::post('/pet', 'PetController@store')->name('pets.store');
+Route::get('/pet/{pet_id}', 'PetController@show')->name('pet.show');
+
+Route::get('/pet/{pet_id}/edit', 'PetController@edit')->name('pet.edit');
+
+Route::put('/pet/{pet_id}/update', 'PetController@update')->name('pet.update');
 
 Route::get('/search', 'SearchController@index')->name('search.index');
 

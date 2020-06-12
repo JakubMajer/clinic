@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Pets;
+use App\Pet;
 
 class PetController extends Controller
 {
     public function index()
     {
-        return view('pets.index');
+        $pets = Pet::all();
+        return view('pets.index', compact('pets'));
     }
 
-    public function show()
-    {
-        # code...
+    public function show($pet_id)
+    { 
+        $pet = Pet::findOrFail($pet_id);
+        return view('pets.show', compact('pet'));
     }
 
     public function create()
@@ -23,17 +25,39 @@ class PetController extends Controller
         return view('pets.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        # code...
+       $pet = new Pet;
+       $pet->name = $request->input('name'); 
+       $pet->breed = $request->input('breed');
+       $pet->image = $request->input('image'); 
+       $pet->weight = $request->input('weight');
+       $pet->age = $request->input('age');   
+       $pet->owner_id = $request->input('owner_id');
+
+       $pet->save();
+
+       return redirect('/pet/'. $pet->id);
     }
 
-    public function edit()
+    public function edit($pet_id)
     {
-        # code...
+        $pet = Pet::findOrFail($pet_id);
+        return view('pets.show', compact('pet'));
     }
-    public function update()
+    public function update($pet_id, Request $request)
     {
-        # code...
+        $pet = Pet::findOrFail($pet_id);
+
+        $pet->name = $request->input('name'); 
+       $pet->breed = $request->input('breed');
+       $pet->image = $request->input('image'); 
+       $pet->weight = $request->input('weight');
+       $pet->age = $request->input('age');   
+       $pet->owner_id = $request->input('owner_id');
+
+       $pet->save();
+
+       return redirect('/pet/'. $pet->id);
     }
 }
